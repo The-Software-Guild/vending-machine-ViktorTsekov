@@ -24,6 +24,17 @@ public class Service {
         NICKEL,
         PENNIE;
 
+        public static int getValueOfChange(Change change) {
+            switch(change) {
+                case QUARTER: return 25;
+                case DIME: return 10;
+                case NICKEL: return 5;
+                case PENNIE: return 1;
+            }
+
+            return -1;
+        }
+
         public static String getPrintable(Change change, int quantity) {
             return quantity + " " + change.toString().toLowerCase() + (quantity == 1 ? "" : "s");
         }
@@ -40,17 +51,17 @@ public class Service {
         int pennies = 0;
 
         while(temp > 0) {
-            if(temp >= 25) {
-                temp -= 25;
+            if(temp >= Change.getValueOfChange(Change.QUARTER)) {
+                temp -= Change.getValueOfChange(Change.QUARTER);
                 quarters++;
-            } else if(temp >= 10) {
-                temp -= 10;
+            } else if(temp >= Change.getValueOfChange(Change.DIME)) {
+                temp -= Change.getValueOfChange(Change.DIME);
                 dimes++;
-            } else if(temp >= 5) {
-                temp -= 5;
+            } else if(temp >= Change.getValueOfChange(Change.NICKEL)) {
+                temp -= Change.getValueOfChange(Change.NICKEL);
                 nickels++;
             } else {
-                temp -= 1;
+                temp -= Change.getValueOfChange(Change.PENNIE);
                 pennies++;
             }
         }
